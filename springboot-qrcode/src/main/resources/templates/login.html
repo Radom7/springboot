@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>二维码登录</title>
+    <script src="//cdn.bootcss.com/angular.js/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        var app = angular.module('app', []);
+        app.controller('MainController', function($rootScope, $scope, $http) {
+            //二维码图片src
+            $scope.src = null;
+            //获取二维码
+            $scope.getQrCode = function() {
+                $http.get('/login/getQrCode').success(function(data) {
+                    if (!data || !data.loginId || !data.image)
+                        return;
+                    $scope.src = 'data:image/png;base64,' + data.image
+                    $scope.getResponse(data.loginId)
+                });
+            }
+            //获取登录响应
+            $scope.getResponse = function(loginId) {
+                $http.get('/login/getResponse/' + loginId).success(function(data) {
+                    if (!data) {
+                        setTimeout($scope.getQrCode(), 1000);
+                        return;
+                    }
+                    //一秒后，重新获取登录二维码
+                    if (!data.success) {
+                        if (data.stats == 'waiting') {
+                            //一秒后再次调用
+                            setTimeout(function() {
+                                $scope.getResponse(loginId);
+                            }, 1000);
+                        } else {
+                            //重新获取二维码
+                            setTimeout(function() {
+                                $scope.getQrCode(loginId);
+                            }, 1000);
+                        }
+                        return;
+                    }
+                    //登录成功，进去首页
+                    location.href = '/'
+                }).error(function(data, status) {
+                    //一秒后，重新获取登录二维码
+                    setTimeout(function() {
+                        $scope.getQrCode(loginId);
+                    }, 1000);
+                })
+            }
+            $scope.getQrCode();
+        });
+        /*]]>*/
+    </script>
+</head>
+<body ng-app="app" ng-controller="MainController">
+<h1>扫码登录</h1>
+<img ng-show="src" ng-src="{{src}}" />
+</body>
+</html>

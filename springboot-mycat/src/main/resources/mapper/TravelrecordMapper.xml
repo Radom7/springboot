@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haiyu.mapper.TravelrecordMapper">
+  <resultMap id="BaseResultMap" type="com.haiyu.entity.Travelrecord">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="traveldate" jdbcType="DATE" property="traveldate" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="days" jdbcType="INTEGER" property="days" />
+  </resultMap>
+</mapper>

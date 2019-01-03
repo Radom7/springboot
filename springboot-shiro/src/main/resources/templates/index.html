@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:shiro="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>商品管理系统后台主页</title>
+</head>
+<body>
+<h3>商品管理系统后台主页</h3>
+
+当前用户名：<span th:text="${session.userName}"></span>，<a href="/user/logout">注销</a>
+
+<hr/>
+<span shiro:hasPermission="product:add">
+<a href="/product/toAdd">商品添加</a><br/>
+</span>
+<span shiro:hasPermission="product:update">
+<a href="/product/toUpdate">商品修改</a><br/>
+</span>
+<span shiro:hasPermission="product:list">
+<a href="/product/toList">商品列表</a><br/>
+</span>
+</body>
+</html>

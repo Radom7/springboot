@@ -1,0 +1,4 @@
+spring:
+  redis:
+    host: 47.98.104.146
+logging.level.org.springframework.security: DEBUG

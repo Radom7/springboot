@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haiyu.dao.UserMapper">
+	<select id="findByName" parameterType="string" resultType="com.haiyu.domain.User">
+		SELECT id,
+		NAME,
+		PASSWORD
+		FROM
+		shiro.t_user
+		where name = #{value}
+	</select>
+	
+	<select id="findPermissionByUserId" parameterType="int"
+		resultType="string">
+		SELECT p.permission
+		FROM t_user u
+		INNER JOIN t_user_role ur ON u.id = ur.user_id
+		INNER JOIN t_role_permission rp ON ur.role_id = rp.role_id
+		INNER JOIN t_permission p ON rp.permission_id = p.id
+		WHERE u.id = #{value};
+	</select>
+
+	<update id="updatePassword" parameterType="com.haiyu.domain.User">
+		update shiro.t_user 
+		   set password = #{password} 
+		     where id = #{id}
+	</update>
+
+</mapper>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/signin.css}"/>
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+    <title>login</title>
+</head>
+<body>
+<div class="container">
+    <div class="starter-template">
+        <p th:if="${param.logout}" class="bg-warning">已注销</p>
+        <p th:if="${param.error}" class="bg-danger">有错误，请重试</p>
+        <h2>使用账号密码登录</h2>
+        <form class="form-signin" role="form" name="form" th:action="@{/login}" action="/login" method="post">
+            <div class="form-group">
+                账号:<input type="text" class="form-control" id="username" name="username" value="" placeholder="账号"/>
+            </div>
+            <div class="form-group">
+                密码:<input type="password" class="form-control" id="password" name="password" placeholder="密码"/>
+            </div>
+            <input type="submit" id="login" value="Login" class="btn btn-primary"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>
