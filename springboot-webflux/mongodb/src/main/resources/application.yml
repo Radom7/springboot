@@ -1,0 +1,9 @@
+spring:
+  redis:
+    host: 192.168.0.139
+    port: 6379
+    timeout: 5000
+  data:
+    mongodb:
+      host: 192.168.0.139
+      port: 27017
