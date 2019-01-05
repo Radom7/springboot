@@ -10,7 +10,7 @@ springboot模块学习
 - MyBatis
 - Mybatis-plus
 - Mycat
-- Oauth
+- Oauth2
 - Shiro
 - Security
 - SpringBatch
